@@ -18,6 +18,13 @@ pipeline {
                 }
             }
         }
+           stage('Test image') {
+            steps {
+                script {
+                    echo "Tests passed"
+                }
+            }
+        }
         stage('Publish Image') {  // Corrected the stage name
             steps {
                 script {
@@ -27,12 +34,6 @@ pipeline {
                 }
             }
         }
-        stage('Test image') {
-            steps {
-                script {
-                    echo "Tests passed"
-                }
-            }
-        }
+     
     }
 }
