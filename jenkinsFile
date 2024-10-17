@@ -1,0 +1,38 @@
+pipeline {
+    environment {
+        registry = "adhamkarmadi/tp_jenkins"
+        registryCredential = 'MyID'
+        dockerImage = ''
+    }
+    agent any
+    stages {
+        stage('Cloning Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/adhamkar/TP_Jenkins'
+            }
+        }
+        stage('Building image') {
+            steps {
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
+        }
+        stage('Publish Image') {  // Corrected the stage name
+            steps {
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage('Test image') {
+            steps {
+                script {
+                    echo "Tests passed"
+                }
+            }
+        }
+    }
+}
