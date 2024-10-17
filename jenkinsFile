@@ -36,7 +36,7 @@ pipeline {
         }
          stage('Deploy image') {
             steps {
-                sh 'docker run -d -p 80:80 adhamkarmadi/tp_jenkins:14'
+                sh 'docker run -d -p 8085:80 adhamkarmadi/tp_jenkins:14'
             }
         }
      
