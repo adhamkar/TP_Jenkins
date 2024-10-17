@@ -34,11 +34,11 @@ pipeline {
                 }
             }
         }
-        stage('Deploy image') {
-           steps{
-           bat "docker run -d $registry:$BUILD_NUMBER"
-           }
-         }
+         stage('Deploy image') {
+            steps {
+                sh 'docker run -d -p 80:80 adhamkarmadi/tp_jenkins:14'
+            }
+        }
      
     }
 }
